@@ -1,12 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { fetchComments } from '../actions';
 
 class SearchBar extends React.Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
         const videoId = e.target[0].value.split('v=')[1].trim();
-
-        console.log(videoId);
+        this.props.fetchComments(videoId);
     }
 
     render(){
@@ -25,4 +26,12 @@ class SearchBar extends React.Component{
     }
 }
 
-export default SearchBar;
+const mapStateToProps = state => {
+    return { comments: state.comments };
+}
+
+export default connect(
+    mapStateToProps,
+    { 
+        fetchComments 
+})(SearchBar);
