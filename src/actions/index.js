@@ -1,10 +1,12 @@
 import youtube from '../apis/youtube';
+import history from '../history';
 
 //we will need to pass the ID here
 
 export const fetchComments = id => async (dispatch)=> {
     const comments = await performFetch(id);
     dispatch({ type: 'FETCH_COMMENTS', payload: comments });
+    history.push('/analysis');
 }
 
 const performFetch = async (id) => {
