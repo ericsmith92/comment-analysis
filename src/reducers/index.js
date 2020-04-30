@@ -9,6 +9,16 @@ const fetchComments = (state = [], action) => {
     }
 }
 
+const analyzeComments = (state = [], action) => {
+    switch(action.type){
+        case 'ANALYZE_COMMENTS':
+            return [...state, action.payload];
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
-    comments: fetchComments
+    comments: fetchComments,
+    sentiments: analyzeComments
 });

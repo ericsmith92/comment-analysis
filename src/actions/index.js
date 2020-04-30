@@ -1,8 +1,9 @@
 import youtube from '../apis/youtube';
 import history from '../history';
+const Sentiment = require('sentiment');
 
-//we will need to pass the ID here
 
+//comments
 export const fetchComments = id => async (dispatch)=> {
     const comments = await performFetch(id);
     dispatch({ type: 'FETCH_COMMENTS', payload: comments });
@@ -22,4 +23,21 @@ const performFetch = async (id) => {
 
     return comments;
 }
+
+//sentiment
+export const analyzeComments = () => (dispatch, state) => {
+    const sentiment = new Sentiment();
+
+    const sentiments = state().comments[0].map(comment => {
+        if(comment.snippet){
+            return sentiment.analyze(comment.snippet.topLevelComment.snippet.textOriginal);
+        }
+       
+    });
+
+    dispatch({ type: 'ANALYZE_COMMENTS', payload: sentiments });
+}
+
+
+
 

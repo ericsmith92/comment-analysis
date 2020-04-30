@@ -1,9 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { analyzeComments } from '../actions';
 
-const Graph = () => {
-    return(
-        <div>Graph</div>
-    )
+class Graph extends React.Component{
+
+    componentDidMount(){
+        this.props.analyzeComments();
+    }
+    
+    render(){
+        console.log(this.props);
+        return(
+            <div>Graph</div>
+        )
+    }
 }
 
-export default Graph;
+const mapStateToProps = state => {
+    return { sentiments: state.sentiments };
+}
+
+export default connect(
+    mapStateToProps,
+    { 
+        analyzeComments
+})(Graph);
