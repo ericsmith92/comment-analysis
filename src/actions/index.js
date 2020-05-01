@@ -24,20 +24,37 @@ const performFetch = async (id) => {
     return comments;
 }
 
-//sentiment
+//get all sentiment objects for list of comments
 export const analyzeComments = () => (dispatch, state) => {
-    const sentiment = new Sentiment();
+    const sentimentInstance = new Sentiment();
 
     const sentiments = state().comments[0].map(comment => {
         if(comment.snippet){
-            return sentiment.analyze(comment.snippet.topLevelComment.snippet.textOriginal);
+            return sentimentInstance.analyze(comment.snippet.topLevelComment.snippet.textOriginal);
         }
-       
+        return null;
     });
+
+    //const totalComparatives = reducedComparatives(sentiments);
+    const [totalComparatives, totalSkipped] = reducedComparatives(sentiments);
+    console.log( totalComparatives / ( sentiments.length -  totalSkipped ) );
 
     dispatch({ type: 'ANALYZE_COMMENTS', payload: sentiments });
 }
 
+//reduce total comparitive score
 
+const reducedComparatives = (sentiments) => {
+    let totalComparatives = 0;
+    let totalSkipped = 0;
 
+    sentiments.forEach(sentiment => {
+        if(sentiment){
+            totalComparatives += sentiment.comparative;
+        }else{
+            totalSkipped++;
+        }
+    });
 
+    return [totalComparatives, totalSkipped];
+}
