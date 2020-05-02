@@ -25,26 +25,25 @@ const performFetch = async (id) => {
 }
 
 //get all sentiment objects for list of comments
-export const analyzeComments = () => (dispatch, state) => {
+export const analyzeComments = () => async (dispatch, state) => {
     const sentimentInstance = new Sentiment();
 
-    const sentiments = state().comments[0].map(comment => {
+    const sentiments = await state().comments[0].map(comment => {
         if(comment.snippet){
             return sentimentInstance.analyze(comment.snippet.topLevelComment.snippet.textOriginal);
         }
         return null;
     });
 
-    //const totalComparatives = reducedComparatives(sentiments);
-    const [totalComparatives, totalSkipped] = reducedComparatives(sentiments);
-    console.log( totalComparatives / ( sentiments.length -  totalSkipped ) );
-
     dispatch({ type: 'ANALYZE_COMMENTS', payload: sentiments });
 }
 
 //reduce total comparitive score
 
-const reducedComparatives = (sentiments) => {
+export const reducedComparatives = () => (dispatch, state) => {
+    const sentiments = state().sentiments[0];
+    //const sentiments = state.sentiments;
+    console.log(sentiments);
     let totalComparatives = 0;
     let totalSkipped = 0;
 
@@ -56,5 +55,5 @@ const reducedComparatives = (sentiments) => {
         }
     });
 
-    return [totalComparatives, totalSkipped];
+    dispatch({ type: 'REDUCE_COMPARATIVES', payload: totalComparatives / ( sentiments.length -  totalSkipped )});
 }
