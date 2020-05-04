@@ -13,10 +13,24 @@ class Graph extends React.Component{
         this.props.reducedComparatives();
     }
 
+    getOverallSentiment = (comparative) => {
+        let msg = '';
+
+        if(comparative > 0){
+            msg = 'Positive';
+        }else if(comparative < 0){
+            msg = 'Negative';
+        }else{
+            msg = 'Neutral';
+        }
+        
+        return msg;
+    }
+
     
     render(){
         return(
-            <div>{this.props.totalComparative ? this.props.totalComparative[0] : 'Loading...'}</div>
+            <div>{this.props.totalComparative ? `Overall comparative is ${this.getOverallSentiment(this.props.totalComparative[0] )} : ${this.props.totalComparative[0]}` : 'Loading...'}</div>
         )
     }
 }
