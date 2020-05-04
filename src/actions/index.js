@@ -42,8 +42,6 @@ export const analyzeComments = () => async (dispatch, state) => {
 
 export const reducedComparatives = () => (dispatch, state) => {
     const sentiments = state().sentiments[0];
-    //const sentiments = state.sentiments;
-    console.log(sentiments);
     let totalComparatives = 0;
     let totalSkipped = 0;
 
@@ -56,4 +54,22 @@ export const reducedComparatives = () => (dispatch, state) => {
     });
 
     dispatch({ type: 'REDUCE_COMPARATIVES', payload: totalComparatives / ( sentiments.length -  totalSkipped )});
+}
+
+//get count for all scores
+
+export const countScores = () => async (dispatch, state) => {
+    let scores = {};
+    const sentiments = await state().sentiments[0];
+    sentiments.forEach(sentiment => {
+        if(sentiment){
+            if(scores.hasOwnProperty(sentiment.score)){
+                scores[sentiment.score]++;
+            }else{
+                scores[sentiment.score] = 1;
+            }
+        }
+    });
+
+    dispatch({ type: 'COUNT_SCORES', payload: scores});
 }

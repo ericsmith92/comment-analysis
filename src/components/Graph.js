@@ -1,47 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { analyzeComments, reducedComparatives  } from '../actions';
+import { countScores } from '../actions';
 
 class Graph extends React.Component{
-
-    componentDidMount(){
-       this.getAndAnalyzeComments();
-    }
-
-    getAndAnalyzeComments = async () => {
-        await this.props.analyzeComments();
-        this.props.reducedComparatives();
-    }
-
-    getOverallSentiment = (comparative) => {
-        let msg = '';
-
-        if(comparative > 0){
-            msg = 'Positive';
-        }else if(comparative < 0){
-            msg = 'Negative';
-        }else{
-            msg = 'Neutral';
-        }
-        
-        return msg;
-    }
-
     
+    componentDidMount(){
+        console.log(this.props);
+    }
+
     render(){
         return(
-            <div>{this.props.totalComparative ? `Overall comparative is ${this.getOverallSentiment(this.props.totalComparative[0] )} : ${this.props.totalComparative[0]}` : 'Loading...'}</div>
+            <div>Graph</div>
         )
     }
 }
 
+
 const mapStateToProps = state => {
-    return { sentiments: state.sentiments, totalComparative: state.totalComparatives };
+    return { scores: state.scores };
 }
 
 export default connect(
     mapStateToProps,
     { 
-        analyzeComments,
-        reducedComparatives 
+        countScores
 })(Graph);

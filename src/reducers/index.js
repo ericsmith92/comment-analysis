@@ -27,8 +27,18 @@ const reducedComparatives = (state = [], action) => {
     }
 }
 
+const countScores = (state = [], action) => {
+    switch(action.type){
+        case 'COUNT_SCORES':
+            return [...state, action.payload];
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     comments: fetchComments,
     sentiments: analyzeComments,
-    totalComparatives: reducedComparatives
+    totalComparatives: reducedComparatives,
+    scores: countScores
 });
