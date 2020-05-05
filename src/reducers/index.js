@@ -36,9 +36,19 @@ const countScores = (state = [], action) => {
     }
 }
 
+const getWidthAndHeight = (state = [], action) => {
+    switch(action.type){
+        case 'GET_WIDTH_AND_HEIGHT':
+            return [...state, action.payload];
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     comments: fetchComments,
     sentiments: analyzeComments,
     totalComparatives: reducedComparatives,
-    scores: countScores
+    scores: countScores,
+    widthAndHeight: getWidthAndHeight
 });

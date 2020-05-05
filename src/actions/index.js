@@ -73,3 +73,24 @@ export const countScores = () => async (dispatch, state) => {
 
     dispatch({ type: 'COUNT_SCORES', payload: scores});
 }
+
+//get width and height of graph
+export const getWidthAndHeight = () => async (dispatch, state) => {
+    const scores = state().scores[0];
+    sortScores(scores);
+    sortScoreCounts(scores);
+    const width = sortScores(scores).length * 10;
+    const height = sortScoreCounts(scores)[sortScoreCounts(scores).length - 1] * 10; 
+
+    dispatch({ type: 'GET_WIDTH_AND_HEIGHT', payload: [width, height]});
+}
+
+const sortScores = (scores) => {
+    const sortedScores = Object.keys(scores).sort((prevNum, nextNum) => prevNum - nextNum);
+    return sortedScores;
+}
+
+const sortScoreCounts = (scores) => {
+    const sortedCounts = Object.values(scores).sort((prevNum, nextNum) => prevNum - nextNum);
+    return sortedCounts;
+}
