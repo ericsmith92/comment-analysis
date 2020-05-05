@@ -1,16 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { countScores, getWidthAndHeight } from '../actions';
+import { getWidthAndHeight } from '../actions';
 
 class Graph extends React.Component{
     
-    componentDidUpdate(){
+    componentDidMount(){
         if(this.props.scores){
-            this.props.getWidthAndHeight();
+            setTimeout(() => { 
+                this.props.getWidthAndHeight();
+            }, 3000);
         }
     }
 
     render(){
+        console.log(this.props);
         return(
             <div>Graph</div>
         )
@@ -19,12 +22,11 @@ class Graph extends React.Component{
 
 
 const mapStateToProps = state => {
-    return { scores: state.scores };
+    return { scores: state.scores, widthAndHeight: state.widthAndHeight };
 }
 
 export default connect(
     mapStateToProps,
     { 
-        countScores,
         getWidthAndHeight
 })(Graph);
