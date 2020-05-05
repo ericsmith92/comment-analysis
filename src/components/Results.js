@@ -13,7 +13,7 @@ class Results extends React.Component{
     getAndAnalyzeComments = async () => {
         await this.props.analyzeComments();
         await this.props.reducedComparatives();
-        this.props.countScores();
+        await this.props.countScores();
     }
 
     getOverallSentiment = (comparative) => {

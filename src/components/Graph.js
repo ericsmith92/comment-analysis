@@ -4,8 +4,16 @@ import { countScores } from '../actions';
 
 class Graph extends React.Component{
     
-    componentDidMount(){
-        console.log(this.props);
+    componentDidUpdate(){
+        if(this.props.scores){
+            this.sortScores();
+        }
+    }
+
+    sortScores(){
+        const sortedScores = Object.keys(this.props.scores[0]).sort((prevNum, nextNum) => prevNum - nextNum);
+        console.log(sortedScores);
+        return sortedScores;
     }
 
     render(){
