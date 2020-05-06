@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { analyzeComments, reducedComparatives, countScores } from '../actions';
+import { analyzeComments, reducedComparatives, countScores, getWidthAndHeight } from '../actions';
 
 import Graph from './Graph';
 
@@ -14,6 +14,7 @@ class Results extends React.Component{
         await this.props.analyzeComments();
         await this.props.reducedComparatives();
         await this.props.countScores();
+        this.props.getWidthAndHeight();
     }
 
     getOverallSentiment = (comparative) => {
@@ -35,14 +36,14 @@ class Results extends React.Component{
         return(
             <div>
                 {this.props.totalComparative ? `Overall comparative is ${this.getOverallSentiment(this.props.totalComparative[0] )} : ${this.props.totalComparative[0]}` : 'Loading...'}
-                {this.props.scores ? <Graph /> : ''}
+                {this.props.widthAndHeight ? <Graph /> : ''}
             </div>
         )
     }
 }
 
 const mapStateToProps = state => {
-    return { sentiments: state.sentiments, totalComparative: state.totalComparatives, scores: state.scores };
+    return { sentiments: state.sentiments, totalComparative: state.totalComparatives, scores: state.scores,  widthAndHeight: state.widthAndHeight};
 }
 
 export default connect(
@@ -50,5 +51,6 @@ export default connect(
     { 
         analyzeComments,
         reducedComparatives,
-        countScores
+        countScores,
+        getWidthAndHeight
 })(Results);

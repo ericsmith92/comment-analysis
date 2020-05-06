@@ -1,22 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getWidthAndHeight } from '../actions';
 
 class Graph extends React.Component{
     
-    componentDidMount(){
-        if(this.props.scores){
-            setTimeout(() => { 
-                this.props.getWidthAndHeight();
-            }, 3000);
+    componentDidUpdate(){
+        if(this.props.widthAndHeight.length){
+            console.log(this.props.widthAndHeight);
         }
     }
 
     render(){
-        console.log(this.props);
-        return(
-            <div>Graph</div>
-        )
+        if(!this.props.widthAndHeight.length){
+            return <div>Loading...</div>
+        }else{
+            console.log(this.props.widthAndHeight[0][0]);
+            return(
+                <div style={{background: 'pink', width: `${this.props.widthAndHeight[0][0]}px`, height: `${this.props.widthAndHeight[0][1]}px`}}></div>
+            )
+        }
     }
 }
 
@@ -26,7 +27,4 @@ const mapStateToProps = state => {
 }
 
 export default connect(
-    mapStateToProps,
-    { 
-        getWidthAndHeight
-})(Graph);
+    mapStateToProps)(Graph);
