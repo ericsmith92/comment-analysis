@@ -3,6 +3,7 @@ import { Router, Route } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import Results from './Results';
 import history from '../history';
+import '../styles.scss';
 
 const App = () => {
     return(

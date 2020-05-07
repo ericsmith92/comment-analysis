@@ -3,20 +3,35 @@ import { connect } from 'react-redux';
 
 class Graph extends React.Component{
     
-    componentDidUpdate(){
-        if(this.props.widthAndHeight.length){
-            console.log(this.props.widthAndHeight);
+    //TODO: create a render function that will build JSX graph from scores + width and height
+
+    labelYAxis(height){
+        const maxValue = (height - 10) / 20;
+        const values = [];
+        for(let i = maxValue; i >= 0; i--){
+            values.push(<span key={i}>{i}</span>)
         }
+
+        return values;
+    }   
+
+    buildGraph(){
+        const [width, height] = this.props.widthAndHeight[0];
+
+        return(
+            <div className="graph" style={{width: `${width}px`, height: `${height}px`}}>
+                <div className="graph_y">
+                    {this.labelYAxis(height)}
+                </div>
+            </div>
+        )
     }
 
     render(){
         if(!this.props.widthAndHeight.length){
             return <div>Loading...</div>
         }else{
-            console.log(this.props.widthAndHeight[0][0]);
-            return(
-                <div style={{background: 'pink', width: `${this.props.widthAndHeight[0][0]}px`, height: `${this.props.widthAndHeight[0][1]}px`}}></div>
-            )
+            return this.buildGraph();
         }
     }
 }
@@ -24,7 +39,7 @@ class Graph extends React.Component{
 
 const mapStateToProps = state => {
     return { scores: state.scores, widthAndHeight: state.widthAndHeight };
-}
+}      
 
 export default connect(
     mapStateToProps)(Graph);

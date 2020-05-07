@@ -1,0 +1,29 @@
+.graph{
+    background-color: pink; 
+    position: relative;
+}
+
+.graph_y {
+    background: green;
+    position: absolute;
+    top : 0;
+    left: -25px;
+    height: 100%;
+}
+
+.graph_y span{
+    display: block;
+    position: relative;
+    height: 20px;
+}
+
+.graph_y span:after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 1px;
+    background-color: #000;
+    top: 50%;
+    transform: translateY(-50%);
+}
+

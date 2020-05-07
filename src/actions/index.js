@@ -80,7 +80,7 @@ export const getWidthAndHeight = () => (dispatch, state) => {
     sortScores(scores);
     sortScoreCounts(scores);
     const width = sortScores(scores).length * 10;
-    const height = sortScoreCounts(scores)[sortScoreCounts(scores).length - 1] * 10; 
+    const height = sortScoreCounts(scores)[sortScoreCounts(scores).length - 1] * 20 + 10; 
 
     dispatch({ type: 'GET_WIDTH_AND_HEIGHT', payload: [width, height]});
 }
