@@ -15,13 +15,27 @@ class Graph extends React.Component{
         return values;
     }   
 
+    labelXAxis(){
+        const sortedScores = Object.keys(this.props.scores[0]).sort((firstScore, nextScore) => firstScore - nextScore);
+        const values = [];
+        sortedScores.forEach(score => {
+            values.push(<span key={score}>{score}</span>);
+
+        });
+
+        return values;
+    }
+
     buildGraph(){
         const [width, height] = this.props.widthAndHeight[0];
-
+        this.labelXAxis();
         return(
             <div className="graph" style={{width: `${width}px`, height: `${height}px`}}>
                 <div className="graph_y">
                     {this.labelYAxis(height)}
+                </div>
+                <div className="graph_x">
+                    {this.labelXAxis()}
                 </div>
             </div>
         )

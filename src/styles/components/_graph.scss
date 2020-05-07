@@ -27,3 +27,28 @@
     transform: translateY(-50%);
 }
 
+.graph_x {
+    position: absolute;
+    width: 100%;
+    background: blue;
+    bottom: -30px;
+}
+
+.graph_x span{
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    text-align: center;
+}
+
+.graph_x span:before{
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 10px;
+    background-color: #000;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
