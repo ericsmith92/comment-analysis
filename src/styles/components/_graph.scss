@@ -1,54 +1,54 @@
 .graph{
     background-color: pink; 
     position: relative;
-}
 
-.graph_y {
-    background: green;
-    position: absolute;
-    top : 0;
-    left: -25px;
-    height: 100%;
-}
+    &_y{
+        background: green;
+        position: absolute;
+        top : 0;
+        left: -25px;
+        height: 100%;
 
-.graph_y span{
-    display: block;
-    position: relative;
-    height: 20px;
-}
+        span{
+            display: block;
+            position: relative;
+            height: 20px;
 
-.graph_y span:after{
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 1px;
-    background-color: #000;
-    top: 50%;
-    transform: translateY(-50%);
-}
+            &:after{
+                content: '';
+                position: absolute;
+                width: 10px;
+                height: 1px;
+                background-color: #000;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+        }
+    }
 
-.graph_x {
-    position: absolute;
-    width: 100%;
-    background: blue;
-    bottom: -30px;
-}
+    &_x{
+        position: absolute;
+        width: 100%;
+        background: blue;
+        bottom: -30px;
 
-.graph_x span{
-    display: inline-block;
-    position: relative;
-    width: 20px;
-    text-align: center;
-}
+        span{
+            display: inline-block;
+            position: relative;
+            width: 20px;
+            text-align: center;
 
-.graph_x span:before{
-    content: '';
-    position: absolute;
-    width: 1px;
-    height: 10px;
-    background-color: #000;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
+            &:before{
+                content: '';
+                position: absolute;
+                width: 1px;
+                height: 10px;
+                background-color: #000;
+                top: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
 }
-
