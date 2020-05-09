@@ -28,14 +28,14 @@ class Graph extends React.Component{
     }
 
     addPointsToGraph(){
+        console.log(this.props.scores[0]);
         const sortedScores = Object.keys(this.props.scores[0]).sort((firstScore, nextScore) => firstScore - nextScore);
-        const sortedValues = Object.values(sortedScores);
         const points = [];
-        sortedValues.forEach((value, index) => {
+        sortedScores.forEach((value, index) => {
             if(index === 0){
-                points.push(<div className="point" key={index} style={{left: '10px', bottom: `${Math.abs(value) * 20}px`}}></div>);
+                points.push(<div className="point" key={index} style={{left: '10px', bottom: `${Math.abs(this.props.scores[0][value]) * 20}px`}}></div>);
             }else{
-                points.push(<div className="point" key={index} style={{left: `${index * 30}px`, bottom: `${Math.abs(value) * 20}px`}}></div>);
+                points.push(<div className="point" key={index} style={{left: `${index * 20 + 10}px`, bottom: `${Math.abs(this.props.scores[0][value]) * 20}px`}}></div>);
             }
         });
 
