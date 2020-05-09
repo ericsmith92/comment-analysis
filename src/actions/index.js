@@ -77,8 +77,6 @@ export const countScores = () => async (dispatch, state) => {
 //get width and height of graph
 export const getWidthAndHeight = () => (dispatch, state) => {
     const scores = state().scores[0];
-    sortScores(scores);
-    sortScoreCounts(scores);
     const width = sortScores(scores).length * 20;
     const height = sortScoreCounts(scores)[sortScoreCounts(scores).length - 1] * 20 + 10; 
 
