@@ -1,13 +1,14 @@
 .graph{
-    background-color: pink; 
     position: relative;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
 
     &_y{
-        background: green;
         position: absolute;
         top : 0;
-        left: -25px;
+        left: -26px;
         height: 100%;
+        text-align: right;
 
         span{
             display: block;
@@ -29,8 +30,7 @@
 
     &_x{
         position: absolute;
-        width: 100%;
-        background: blue;
+        width: calc(100% + 5px);
         bottom: -30px;
 
         span{
