@@ -10,8 +10,8 @@ class Results extends React.Component{
        this.getAndAnalyzeComments();
     }
 
-    getAndAnalyzeComments = async () => {
-        await this.props.analyzeComments();
+    getAndAnalyzeComments = () => {
+        this.props.analyzeComments();
         this.props.reducedComparatives();
         this.props.countScores();
         this.props.sortScores();

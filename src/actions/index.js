@@ -26,10 +26,10 @@ const performFetch = async (id) => {
 }
 
 //get all sentiment objects for list of comments
-export const analyzeComments = () => async (dispatch, state) => {
+export const analyzeComments = () => (dispatch, state) => {
     const sentimentInstance = new Sentiment();
 
-    const sentiments = await state().comments[0].map(comment => {
+    const sentiments = state().comments[0].map(comment => {
         if(comment.snippet){
             return sentimentInstance.analyze(comment.snippet.topLevelComment.snippet.textOriginal);
         }
