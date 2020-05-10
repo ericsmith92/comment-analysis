@@ -36,6 +36,15 @@ const countScores = (state = [], action) => {
     }
 }
 
+const sortScores = (state = [], action) => {
+    switch(action.type){
+        case 'SORT_SCORES':
+            return [...state, action.payload];
+        default:
+            return state;
+    }
+}
+
 const getWidthAndHeight = (state = [], action) => {
     switch(action.type){
         case 'GET_WIDTH_AND_HEIGHT':
@@ -50,5 +59,6 @@ export default combineReducers({
     sentiments: analyzeComments,
     totalComparatives: reducedComparatives,
     scores: countScores,
+    sortedScores: sortScores,
     widthAndHeight: getWidthAndHeight
 });

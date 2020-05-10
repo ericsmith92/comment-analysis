@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { analyzeComments, reducedComparatives, countScores, getWidthAndHeight } from '../actions';
+import { analyzeComments, reducedComparatives, countScores, sortScores, getWidthAndHeight } from '../actions';
 
 import Graph from './Graph';
 
@@ -14,6 +14,7 @@ class Results extends React.Component{
         await this.props.analyzeComments();
         await this.props.reducedComparatives();
         await this.props.countScores();
+        await this.props.sortScores();
         this.props.getWidthAndHeight();
     }
 
@@ -43,7 +44,7 @@ class Results extends React.Component{
 }
 
 const mapStateToProps = state => {
-    return { sentiments: state.sentiments, totalComparative: state.totalComparatives, scores: state.scores,  widthAndHeight: state.widthAndHeight};
+    return { sentiments: state.sentiments, totalComparative: state.totalComparatives, scores: state.scores,  sortedScores: state.sortedScores, widthAndHeight: state.widthAndHeight};
 }
 
 export default connect(
@@ -52,5 +53,6 @@ export default connect(
         analyzeComments,
         reducedComparatives,
         countScores,
+        sortScores,
         getWidthAndHeight
 })(Results);

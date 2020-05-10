@@ -17,7 +17,7 @@ class Graph extends React.Component{
     }   
 
     labelXAxis(){
-        const sortedScores = Object.keys(this.props.scores[0]).sort((firstScore, nextScore) => firstScore - nextScore);
+        const sortedScores = this.props.sortedScores[0];
         const values = [];
         sortedScores.forEach(score => {
             values.push(<span key={score}>{score}</span>);
@@ -28,7 +28,7 @@ class Graph extends React.Component{
     }
 
     addPointsToGraph(){
-        const sortedScores = Object.keys(this.props.scores[0]).sort((firstScore, nextScore) => firstScore - nextScore);
+        const sortedScores = this.props.sortedScores[0];
         const points = [];
         sortedScores.forEach((value, index) => {
             if(index === 0){
@@ -68,7 +68,7 @@ class Graph extends React.Component{
 
 
 const mapStateToProps = state => {
-    return { scores: state.scores, widthAndHeight: state.widthAndHeight };
+    return { scores: state.scores, sortedScores: state.sortedScores, widthAndHeight: state.widthAndHeight };
 }      
 
 export default connect(
