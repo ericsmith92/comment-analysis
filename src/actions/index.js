@@ -59,9 +59,9 @@ export const reducedComparatives = () => (dispatch, state) => {
 
 //get count for all scores
 
-export const countScores = () => async (dispatch, state) => {
+export const countScores = () => (dispatch, state) => {
     let scores = {};
-    const sentiments = await state().sentiments[0];
+    const sentiments = state().sentiments[0];
     
     sentiments.forEach(sentiment => {
         if(sentiment){
