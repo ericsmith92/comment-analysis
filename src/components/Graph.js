@@ -28,7 +28,6 @@ class Graph extends React.Component{
     }
 
     addPointsToGraph(){
-        console.log(this.props.scores[0]);
         const sortedScores = Object.keys(this.props.scores[0]).sort((firstScore, nextScore) => firstScore - nextScore);
         const points = [];
         sortedScores.forEach((value, index) => {

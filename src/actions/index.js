@@ -11,12 +11,13 @@ export const fetchComments = id => async (dispatch)=> {
 }
 
 const performFetch = async (id) => {
-    const response = await youtube.get(`/commentThreads?part=snippet%2Creplies&videoId=${id}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}&maxResults=100`);
+    const url = `/commentThreads?part=snippet%2Creplies&videoId=${id}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}&maxResults=100`;
+    const response = await youtube.get(url);
     const comments = response.data.items;
     let nextPageToken = response.data.nextPageToken;
 
     while(nextPageToken){
-        const recursiveResponse = await youtube.get(`/commentThreads?part=snippet%2Creplies&videoId=${id}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}&maxResults=100&pageToken=${nextPageToken}`);
+        const recursiveResponse = await youtube.get(`${url}&pageToken=${nextPageToken}`);
         comments.push(recursiveResponse.data.items);
         nextPageToken = recursiveResponse.data.nextPageToken;
     }
@@ -61,6 +62,7 @@ export const reducedComparatives = () => (dispatch, state) => {
 export const countScores = () => async (dispatch, state) => {
     let scores = {};
     const sentiments = await state().sentiments[0];
+    
     sentiments.forEach(sentiment => {
         if(sentiment){
             if(scores.hasOwnProperty(sentiment.score)){
