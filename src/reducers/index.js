@@ -54,11 +54,32 @@ const getWidthAndHeight = (state = [], action) => {
     }
 }
 
-export default combineReducers({
+const emptyState = (state = {}, action) => {
+    switch(action.type){
+        case 'EMPTY_STATE':
+            return state = {};
+        default:
+            return state;
+    }
+}
+
+const allReducers = combineReducers({
     comments: fetchComments,
     sentiments: analyzeComments,
     totalComparatives: reducedComparatives,
     scores: countScores,
     sortedScores: sortScores,
-    widthAndHeight: getWidthAndHeight
+    widthAndHeight: getWidthAndHeight,
+    emptyState: emptyState
 });
+
+
+const rootReducer = (state, action) => {
+    if(action.type === 'EMPTY_STATE'){
+        state = undefined;
+    }
+
+    return allReducers(state, action);
+}
+
+export default rootReducer;

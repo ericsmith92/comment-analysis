@@ -96,3 +96,8 @@ const sortScoreCounts = (scores) => {
     const sortedCounts = Object.values(scores).sort((prevNum, nextNum) => prevNum - nextNum);
     return sortedCounts;
 }
+
+export const emptyState = () => (dispatch) => {
+    dispatch({ type: 'EMPTY_STATE', payload: {}});
+    history.push('/');
+}

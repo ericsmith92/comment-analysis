@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import BackButton from './BackButton';
 import { analyzeComments, reducedComparatives, countScores, sortScores, getWidthAndHeight } from '../actions';
+
 
 import Graph from './Graph';
 
@@ -36,6 +38,7 @@ class Results extends React.Component{
     render(){
         return(
             <div>
+                <BackButton />
                 {this.props.totalComparative ? `Overall comparative is ${this.getOverallSentiment(this.props.totalComparative[0] )} : ${this.props.totalComparative[0]}` : 'Loading...'}
                 {this.props.widthAndHeight ? <Graph /> : ''}
             </div>

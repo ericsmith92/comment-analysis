@@ -1,11 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-//import Point from './Point';
 
 class Graph extends React.Component{
     
-    //TODO: create a render function that will build JSX graph from scores + width and height
-
     labelYAxis(height){
         const maxValue = (height - 10) / 20;
         const values = [];
